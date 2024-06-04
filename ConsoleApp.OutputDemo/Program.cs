@@ -5,7 +5,7 @@ int  neil = Convert.ToInt32(Console.ReadLine());
 while (neil != -1)
 {
     // WriteLine is a method that takes a block of text and print it to the screen.
-    Console.WriteLine("Hello, World! My name is Trevoir Williams");
+    Console.WriteLine("Hello, World! My name is Cornelius Toole");
     Console.WriteLine("I am from Jamaica!");
     Console.WriteLine("Anything you want to say");
 
