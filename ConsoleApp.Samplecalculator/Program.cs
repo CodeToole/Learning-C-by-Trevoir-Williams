@@ -1,97 +1,136 @@
-﻿using System;
+﻿// See https://aka.ms/new-console-template for more information
 
-decimal results = 0;
-decimal num1, num2 = 0;
-decimal answer = 0;
+// Variable Declarations
+int choice = 0;
+int num1, num2 = 0;
 
-while (results != -1)
+// Show calculator options / Show menu
+while (choice != -1)
 {
     try
     {
-        Console.WriteLine("Welcome to Neil's calculator!");
-        Console.WriteLine("Please select an option of operation (use -1 to exit):");
-        Console.WriteLine("1) Addition");
-        Console.WriteLine("2) Subtraction");
-        Console.WriteLine("3) Division");
-        Console.WriteLine("4) Multiplication");
-        Console.WriteLine("5) Fibonacci sequence");
+        // Welcome Message
+        PrintMenu();
 
-        results = Convert.ToDecimal(Console.ReadLine());
+        choice = Convert.ToInt32(Console.ReadLine());
 
-        if (results == -1)
+        if (choice == -1)
         {
             break;
         }
 
-        Console.WriteLine("Enter your first number:");
-        num1 = Convert.ToDecimal(Console.ReadLine());
+        Console.Write("Please enter the first number: ");
+        num1 = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine("Enter your second number:");
-        num2 = Convert.ToDecimal(Console.ReadLine());
+        Console.Write("Please enter the second number: ");
+        num2 = Convert.ToInt32(Console.ReadLine());
 
-        switch (results)
+        // Decide which operation is needed based on selected option
+        /*If statements */
+        //if (choice == 1)
+        //{
+        //    /* do addition */
+        //}
+        //else if (choice == 2)
+        //{
+        //    /* subtraction*/
+        //}
+        //else if (choice == 3)
+        //{
+        //    /*Multiplication*/
+        //}
+        //else if (choice == 4)
+        //{
+        //    /*Division*/
+        //}
+        //else
+        //{
+        //    Console.WriteLine("Invalid choice");
+        //}
+        // Prompt for user input
+
+        /* Switch statement */
+        int answer = 0;
+        switch (choice)
         {
             case 1:
-                answer = num1 + num2;
+                answer = AddNumbers(num1, num2);
                 break;
             case 2:
-                answer = num1 - num2;
+                answer = SubtractNumbers(num1, num2);
                 break;
             case 3:
-                if (num2 == 0)
-                {
-                    throw new DivideByZeroException();
-                }
-                answer = num1 / num2;
+                answer = Product(num1, num2);
                 break;
             case 4:
-                answer = num1 * num2;
+                answer = Quotient(num1, num2);
                 break;
             case 5:
-                // Ensure the first number is less than the second number
-                if (num1 > num2)
-                {
-                    decimal temp = num1;
-                    num1 = num2;
-                    num2 = temp;
-                }
-
-                // Calculate Fibonacci sequence within the range of num1 to num2
-                decimal a = 0, b = 1, c = 0;
-                Console.WriteLine("Fibonacci sequence: ");
-                while (c <= num2)
-                {
-                    if (c >= num1)
-                    {
-                        Console.Write($"{c} ");
-                    }
-                    a = b;
-                    b = c;
-                    c = a + b;
-                }
-                Console.WriteLine(); // For a new line after printing the sequence
+                answer = Fibonnaci(num1, num2);
                 break;
             default:
-                throw new Exception("Invalid menu item selected");
+                throw new Exception("Invalid Menu Item Selected.");
         }
 
-        // Print output
-        Console.WriteLine($"The result is {answer}");
+        // print output 
+        Console.WriteLine($"The result is: {answer}");
     }
     catch (DivideByZeroException)
     {
-        Console.WriteLine("Cannot divide by zero. Please enter a non-zero divisor.");
+        Console.WriteLine("Cannot divide by zero");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"An error occurred: {ex.Message}");
+        Console.WriteLine(ex.Message);
     }
     finally
     {
-        Console.WriteLine("Press enter to continue.");
+        Console.WriteLine("Press any key to continue.");
         Console.ReadLine();
-        Console.Clear();
     }
 }
 
-Console.WriteLine("Thank you for using Neil's calculator!");
+Console.WriteLine("******** - Thank you for using the sample calculator! - ********");
+
+
+// Method Definitions
+int AddNumbers(int num1, int num2)
+{
+    return num1 + num2;
+}
+
+int SubtractNumbers(int num1, int num2)
+{
+    return num1 - num2;
+}
+
+int Product(int num1, int num2)
+{
+    return num1 * num2;
+}
+
+int Quotient(int num1, int num2)
+{
+    return num1 / num2;
+}
+
+int Fibonnaci(int num1, int num2)
+{
+    var answer = 0;
+    for (int i = num1; i <= num2; i++)
+    {
+        answer += i;
+    }
+    return answer;
+}
+void PrintMenu()
+{
+    Console.Clear();
+    Console.WriteLine("******** - Welcome to the sample calculator! - ********");
+    Console.WriteLine("Please select an operation (-1 to exit program) ");
+    Console.WriteLine("1. Addition");
+    Console.WriteLine("2. Subtraction");
+    Console.WriteLine("3. Multiplication");
+    Console.WriteLine("4. Division");
+    Console.WriteLine("5. Fibonacci sequence");
+}
